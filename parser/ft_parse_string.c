@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_parse_string.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tnotch <tnotch@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/19 14:22:36 by kirilltruha       #+#    #+#             */
-/*   Updated: 2021/01/07 19:11:14 by tnotch           ###   ########.fr       */
+/*   Created: 2021/01/07 19:15:13 by tnotch            #+#    #+#             */
+/*   Updated: 2021/01/07 19:39:47 by tnotch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
+#include "../include/ft_printf.h"
 
-#define FT_PRINTF_H
-
-
-#include "../libft/libft.h"
-#include <stdarg.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <unistd.h>
-
-typedef struct			s_var
+void	parse_p(const char *var)
 {
-	char				type;
-	char				flag;
-	int					width;
-	int					accur;
-}						t_var;
+	t_var	variable;
+	
+	while(*var == '-' || *var == '+')
+	{
+		if(*var == '-')
+			variable.flag = *var++;
+		if(*var == '+')// обработка флага +
+			var++;
+	}
+	while(*var > 47 && *var < 58)
+	{
+		
+	}
 
+int	main()
+{
+	const char *input = "----+++---d";
 
-#endif
+	parse_p(input);
+}
