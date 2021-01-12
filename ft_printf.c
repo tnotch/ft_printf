@@ -6,19 +6,18 @@
 /*   By: kirilltruhan <kirilltruhan@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 14:22:09 by kirilltruha       #+#    #+#             */
-/*   Updated: 2021/01/07 11:46:31 by kirilltruha      ###   ########.fr       */
+/*   Updated: 2021/01/11 21:10:49 by kirilltruha      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/ft_printf.h"
-#include <stdarg.h>
-#include <string.h>
-#include <stdlib.h>
-#include <unistd.h>
 
 char *ft_whattype(char *input, va_list args)
 {
-	if(*input == 'd')
+	t_var	variable; 
+	
+	variable = parse_p(input);
+	if(variable.type == 'd')
 	{
 		return (ft_itoa(va_arg(args, int)));
 	}

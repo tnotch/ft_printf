@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnotch <tnotch@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kirilltruhan <kirilltruhan@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 14:22:36 by kirilltruha       #+#    #+#             */
-/*   Updated: 2021/01/07 19:11:14 by tnotch           ###   ########.fr       */
+/*   Updated: 2021/01/11 21:10:20 by kirilltruha      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+
+
 typedef struct			s_var
 {
 	char				type;
@@ -30,5 +32,6 @@ typedef struct			s_var
 	int					accur;
 }						t_var;
 
+t_var					parse_p(const char *var);
 
 #endif
