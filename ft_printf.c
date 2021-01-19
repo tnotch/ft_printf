@@ -6,22 +6,50 @@
 /*   By: kirilltruhan <kirilltruhan@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 14:22:09 by kirilltruha       #+#    #+#             */
-/*   Updated: 2021/01/11 21:10:49 by kirilltruha      ###   ########.fr       */
+/*   Updated: 2021/01/19 16:26:36 by kirilltruha      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/ft_printf.h"
 
-char *ft_whattype(char *input, va_list args)
+int ft_whattype(char *input, va_list args)
 {
-	t_var	variable; 
+	t_var	variable;
+	int		result;
 	
-	variable = parse_p(input);
+	result = 0;
+	variable = parse_p(input, args);
 	if(variable.type == 'd')
-	{
-		return (ft_itoa(va_arg(args, int)));
-	}
-	return ("error");
+		result = ft_output_d(variable, args);
+	if(variable.type == 'c')
+		result = ft_output_c(variable, args);
+	if(variable.type == 's')
+		result = ft_output_s(variable, args);
+	if(variable.type == 'p')
+		result = ft_output_p(variable, args);
+	if(variable.type == 'i')
+		result = ft_output_d(variable, args);
+	if(variable.type == 'u')
+		result = ft_output_u(variable, args);
+	if(variable.type == 'x'|| variable.type == 'X')
+		result = ft_output_x(variable, args);
+	if(variable.type == '%')
+		result = ft_output_perc(variable);
+	return (result);
+}
+
+char	*ft_pass_var(char *input)
+{
+	while(*input == '-' || *input == '0' || *input == '+' || *input == '#' || *input == ' ')
+		input++;
+	while((*input > 47 && *input < 58) || *input == '*')
+		input++;
+	if (*input == '.')
+		input++;
+	while ((*input > 47 && *input < 58) || *input == '*')
+		input++;
+	input++;
+	return (input);
 }
 
 int	printf_output(char *input, va_list args)
@@ -33,15 +61,16 @@ int	printf_output(char *input, va_list args)
 	start = ft_strdup(input);
 	while(1)
 	{
-		if(*input == '%')
+		while(*input == '%')
 		{
 			input++;
-			ft_putstr_fd(ft_whattype(input, args), 1);
-			input++;
+			result = result + ft_whattype(input, args);
+			input = ft_pass_var(input);
 		}
 		if(!*input)
 			break ;
 		ft_putchar_fd(*input, 1);
+		result++;
 		input++;
 	}
 	free (start);
@@ -60,15 +89,4 @@ int	ft_printf(const char *format, ...)
 	va_end(args);
 	free (safe);
 	return (char_num);
-}
-
-
-
-
-
-int	main(void)
-{
-	int i = 5;
-
-	ft_printf("it is %d\n", i);
 }
