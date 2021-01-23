@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kirilltruhan <kirilltruhan@student.42.f    +#+  +:+       +#+         #
+#    By: tnotch <tnotch@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 17:58:15 by kirilltruha       #+#    #+#              #
-#    Updated: 2021/01/17 23:17:07 by kirilltruha      ###   ########.fr        #
+#    Updated: 2021/01/23 16:03:50 by tnotch           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ src = ft_printf.c \
 	ft_output_s.c \
 	ft_output_u.c \
 	ft_output_x.c \
+	ft_uitoa.c \
 	ft_parse_string.c
 
 gcc = gcc -c -Wall -Werror -Wextra

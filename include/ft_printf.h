@@ -6,7 +6,7 @@
 /*   By: tnotch <tnotch@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 14:22:36 by kirilltruha       #+#    #+#             */
-/*   Updated: 2021/01/23 15:58:13 by tnotch           ###   ########.fr       */
+/*   Updated: 2021/01/23 16:03:47 by tnotch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ int						ft_output_p(t_var variable, va_list args);
 int						ft_output_u(t_var	variable, va_list args);
 int						ft_output_x(t_var variable, va_list args);
 int						ft_output_perc(t_var variable);
+char					*ft_uitoa(unsigned int n);
 
 #endif
