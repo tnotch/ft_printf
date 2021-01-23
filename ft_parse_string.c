@@ -6,7 +6,7 @@
 /*   By: tnotch <tnotch@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/07 19:15:13 by tnotch            #+#    #+#             */
-/*   Updated: 2021/01/23 14:53:44 by tnotch           ###   ########.fr       */
+/*   Updated: 2021/01/23 20:18:32 by tnotch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,23 +75,21 @@ void	ft_parse_accur(char **inp, t_var *vari, va_list args, int *flag)
 
 	var = *inp;
 	size = 0;
-	if (*var == '.')
+	vari->accur = 0;
+	var++;
+	if (*var == '*')
 	{
-		vari->accur = 0;
+		vari->accur = va_arg(args, int);
 		var++;
-		if (*var == '*')
-		{
-			vari->accur = va_arg(args, int);
-			var++;
-			*flag = 1;
-		}
-		else if (*var > 47 && *var < 58)
-		{
-			while (*var > 47 && *var < 58)
-				accur[size++] = *var++;
-			if (accur[0] > 47 && accur[0] < 58)
-				vari->accur = ft_atoi(accur);
-		}
+		*flag = 1;
+	}
+	else if (*var > 47 && *var < 58)
+	{
+		while (*var > 47 && *var < 58)
+			accur[size++] = *var++;
+		accur[size] = '\0';
+		if (accur[0] > 47 && accur[0] < 58)
+			vari->accur = ft_atoi(accur);
 	}
 	*inp = var;
 }
@@ -108,7 +106,8 @@ t_var	parse_p(char *var, va_list args)
 	ft_parse_width(&var, &variable, args);
 	if ((variable.flagnull == 1) && (variable.flagmin == 1))
 		variable.flagnull = 0;
-	ft_parse_accur(&var, &variable, args, &flag);
+	if (*var == '.')
+		ft_parse_accur(&var, &variable, args, &flag);
 	size = variable.width;
 	if ((variable.accur > 0))
 		variable.flagnull = 0;

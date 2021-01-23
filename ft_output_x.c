@@ -6,7 +6,7 @@
 /*   By: tnotch <tnotch@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 17:32:12 by kirilltruha       #+#    #+#             */
-/*   Updated: 2021/01/23 15:49:17 by tnotch           ###   ########.fr       */
+/*   Updated: 2021/01/23 19:45:30 by tnotch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char	*ft_accur_x(char *input, int exponent, t_var vari)
 	int		i;
 	char	*result;
 	char	*acc;
+	char	*freed;
 
 	i = 0;
 	result = NULL;
@@ -55,9 +56,9 @@ char	*ft_accur_x(char *input, int exponent, t_var vari)
 		result = ft_strdup("-");
 		input++;
 	}
-	result = ft_strjoin(result, acc);
+	freed = ft_strjoin(result, acc);
 	free(acc);
-	result = ft_strjoin(result, input);
+	result = ft_strjoin(freed, input);
 	return (result);
 }
 
@@ -111,7 +112,6 @@ int		ft_output_x(t_var variable, va_list args)
 
 	exp = 0;
 	res = va_arg(args, unsigned int);
-	hexa = NULL;
 	exp = ft_exp_of_n(res);
 	hexa = ft_deci_to_hexa_x(exp, res, variable.type);
 	if (variable.accur > exp)

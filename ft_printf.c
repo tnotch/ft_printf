@@ -6,7 +6,7 @@
 /*   By: tnotch <tnotch@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 14:22:09 by kirilltruha       #+#    #+#             */
-/*   Updated: 2021/01/23 14:56:54 by tnotch           ###   ########.fr       */
+/*   Updated: 2021/01/23 19:44:50 by tnotch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,8 @@ char		*ft_pass_var(char *input)
 int			printf_output(char *input, va_list args)
 {
 	int		result;
-	char	*start;
 
 	result = 0;
-	start = ft_strdup(input);
 	while (1)
 	{
 		while (*input == '%')
@@ -74,7 +72,6 @@ int			printf_output(char *input, va_list args)
 		result++;
 		input++;
 	}
-	free(start);
 	return (result);
 }
 
