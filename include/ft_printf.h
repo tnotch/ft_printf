@@ -3,26 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kirilltruhan <kirilltruhan@student.42.f    +#+  +:+       +#+        */
+/*   By: tnotch <tnotch@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 14:22:36 by kirilltruha       #+#    #+#             */
-/*   Updated: 2021/01/18 14:53:45 by kirilltruha      ###   ########.fr       */
+/*   Updated: 2021/01/23 15:58:13 by tnotch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-#define FT_PRINTF_H
-
-
-#include "../libft/libft.h"
-#include <stdarg.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <unistd.h>
-
-
+# include "../libft/libft.h"
+# include <stdarg.h>
+# include <stdio.h>
+# include <string.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 typedef struct			s_var
 {
@@ -34,7 +30,7 @@ typedef struct			s_var
 }						t_var;
 
 int						ft_printf(const char *format, ...);
-t_var					parse_p(const char *var, va_list args);
+t_var					parse_p(char *var, va_list args);
 int						ft_output_d(t_var	variable, va_list args);
 int						ft_output_c(t_var variable, va_list args);
 int						ft_output_s(t_var	variable, va_list args);

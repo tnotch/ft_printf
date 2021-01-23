@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_output_p.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kirilltruhan <kirilltruhan@student.42.f    +#+  +:+       +#+        */
+/*   By: tnotch <tnotch@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 22:26:48 by kirilltruha       #+#    #+#             */
-/*   Updated: 2021/01/18 17:59:36 by kirilltruha      ###   ########.fr       */
+/*   Updated: 2021/01/23 15:53:05 by tnotch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/ft_printf.h"
 
-char	*ft_deci_to_hexa(int	exponent, long long number)
+char	*ft_deci_to_hexa(int exponent, long long number)
 {
 	char		*res;
 	char		*hexa;
@@ -23,7 +23,7 @@ char	*ft_deci_to_hexa(int	exponent, long long number)
 	res = malloc(sizeof(char) * (exponent));
 	res[exponent] = '\0';
 	exponent--;
-	while(exponent > 0 || number != 0)
+	while (exponent > 0 || number != 0)
 	{
 		res[exponent--] = hexa[number % 16];
 		number /= 16;
@@ -36,11 +36,11 @@ char	*ft_width_p(char *input, int width, int flag)
 {
 	int		exp;
 	int		i;
-	char 	*result;
+	char	*result;
 	char	*out;
-	
+
 	i = 0;
-	out = NULL; 
+	out = NULL;
 	exp = ft_strlen(input);
 	result = malloc(sizeof(char) * (width - exp + 1));
 	while ((width - exp) > i)
@@ -59,14 +59,14 @@ char	*ft_width_p(char *input, int width, int flag)
 	return (out);
 }
 
-int	ft_output_p(t_var variable, va_list args)
+int		ft_output_p(t_var variable, va_list args)
 {
 	int			exp;
 	long long	res;
 	long long	save;
 	char		*result;
 	char		*hexa;
-	
+
 	exp = 0;
 	result = ft_strdup("0x");
 	res = (long long)va_arg(args, void *);

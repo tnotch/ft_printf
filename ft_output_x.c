@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_output_x.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kirilltruhan <kirilltruhan@student.42.f    +#+  +:+       +#+        */
+/*   By: tnotch <tnotch@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 17:32:12 by kirilltruha       #+#    #+#             */
-/*   Updated: 2021/01/19 15:26:59 by kirilltruha      ###   ########.fr       */
+/*   Updated: 2021/01/23 15:49:17 by tnotch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/ft_printf.h"
 
-char	*ft_deci_to_hexa_x(int	exponent, unsigned int number, char type)
+char	*ft_deci_to_hexa_x(int exponent, unsigned int number, char type)
 {
 	char		*res;
 	char		*hexa;
@@ -22,11 +22,11 @@ char	*ft_deci_to_hexa_x(int	exponent, unsigned int number, char type)
 	if (type == 'x')
 		hexa = "0123456789abcdef";
 	else if (type == 'X')
-		hexa = "0123456789ABCDEF";	
+		hexa = "0123456789ABCDEF";
 	res = malloc(sizeof(char) * (exponent));
 	res[exponent] = '\0';
 	exponent--;
-	while(exponent > 0 || number != 0)
+	while (exponent > 0 || number != 0)
 	{
 		res[exponent--] = hexa[number % 16];
 		number /= 16;
@@ -52,7 +52,7 @@ char	*ft_accur_x(char *input, int exponent, t_var vari)
 	acc[i] = '\0';
 	if (*input == '-')
 	{
-		result = ft_strdup("-");// NB - free
+		result = ft_strdup("-");
 		input++;
 	}
 	result = ft_strjoin(result, acc);
@@ -61,15 +61,14 @@ char	*ft_accur_x(char *input, int exponent, t_var vari)
 	return (result);
 }
 
-
 char	*ft_width_x(char *input, int width, int flag)
 {
 	int		exp;
 	int		i;
-	char 	*result;
+	char	*result;
 	char	*out;
-	
-	i = 0; 
+
+	i = 0;
 	out = NULL;
 	exp = ft_strlen(input);
 	result = malloc(sizeof(char) * (width - exp + 1));
@@ -89,24 +88,31 @@ char	*ft_width_x(char *input, int width, int flag)
 	return (out);
 }
 
-int	ft_output_x(t_var variable, va_list args)
+int		ft_exp_of_n(unsigned int n)
+{
+	int	exp;
+
+	exp = 0;
+	if (n == 0)
+		exp++;
+	while (n != 0)
+	{
+		n /= 16;
+		exp++;
+	}
+	return (exp);
+}
+
+int		ft_output_x(t_var variable, va_list args)
 {
 	int				exp;
 	unsigned int	res;
-	unsigned int	save;
 	char			*hexa;
-	
+
 	exp = 0;
 	res = va_arg(args, unsigned int);
-	save = res;
 	hexa = NULL;
-	if (save == 0)
-		exp++;
-	while (save != 0)
-	{
-		save /= 16;
-		exp++;
-	}
+	exp = ft_exp_of_n(res);
 	hexa = ft_deci_to_hexa_x(exp, res, variable.type);
 	if (variable.accur > exp)
 		hexa = ft_accur_x(hexa, exp, variable);
